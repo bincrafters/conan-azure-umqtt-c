@@ -18,4 +18,8 @@ class AzureumqttcTestConan(ConanFile):
         self.copy("*.dylib*", dst="bin", src="lib")
 
     def test(self):
-        assert(os.path.isfile("bin/mqtt_client_sample"))
+        os.chdir("bin")
+        app_name = "mqtt_client_sample"
+        if platform.os == "Windows":
+            app_name += ".exe"
+        assert(os.path.isfile(app_name))
