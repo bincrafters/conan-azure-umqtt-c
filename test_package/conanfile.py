@@ -21,6 +21,6 @@ class AzureumqttcTestConan(ConanFile):
     def test(self):
         os.chdir("bin")
         app_name = "mqtt_client_sample"
-        if platform.os == "Windows":
+        if platform.system() == "Windows":
             app_name += ".exe"
         assert(os.path.isfile(app_name))
