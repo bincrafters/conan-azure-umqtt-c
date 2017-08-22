@@ -20,6 +20,10 @@ class AzureUMQTTCConan(ConanFile):
     def source(self):
         tools.get("https://github.com/Azure/azure-umqtt-c/archive/%s.tar.gz" % self.release_date)
 
+    def configure(self):
+        if self.settings.os == "Windows" and self.settings.compiler == "Visual Studio":
+            self.options.shared = False
+
     def build(self):
         conan_magic_lines='''project(umqtt)
         include(../conanbuildinfo.cmake)
