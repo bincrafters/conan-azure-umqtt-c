@@ -13,7 +13,7 @@ class AzureUMQTTCConan(ConanFile):
     license = "https://github.com/Azure/azure-iot-sdk-c/blob/master/LICENSE"
     requires = "Azure-C-Shared-Utility/1.0.41@bincrafters/stable"
     options = {"shared": [True, False]}
-    default_options = "shared=False"
+    default_options = "shared=True"
     release_date = "2017-08-11"
     release_name = "%s-%s" % (name.lower(), release_date)
 
