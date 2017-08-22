@@ -1,5 +1,6 @@
 from conans import ConanFile, CMake
 import os
+import platform
 
 class AzureumqttcTestConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
