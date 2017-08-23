@@ -16,20 +16,21 @@ class AzureUMQTTCConan(ConanFile):
     default_options = "shared=True"
     release_date = "2017-08-11"
     release_name = "%s-%s" % (name.lower(), release_date)
-    lib_short_name = "mqtt"
+    lib_short_name = "umqtt"
     
     def source(self):
-        tools.get("https://github.com/Azure/azure-umqtt-c/archive/%s.tar.gz" % self.release_date)
+        tools.get("%s/archive/%s.tar.gz" % (self.source_url, self.release_date))
 
     def configure(self):
         if self.settings.os == "Windows" and self.settings.compiler == "Visual Studio":
             self.options.shared = False
 
     def build(self):
-        conan_magic_lines='''project(umqtt)
+        conan_magic_lines='''project(%s)
         include(../conanbuildinfo.cmake)
         conan_basic_setup()
-        '''
+        ''' % self.lib_short_name
+        
         tools.replace_in_file("%s/CMakeLists.txt" % self.release_name, "project(%s)" % self.lib_short_name, conan_magic_lines)
         cmake = CMake(self)
         cmake.definitions["skip_samples"] = True
