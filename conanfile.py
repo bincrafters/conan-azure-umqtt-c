@@ -10,7 +10,7 @@ class AzureUMQTTCConan(ConanFile):
     url = "https://github.com/bincrafters/conan-azure-umqtt-c"
     source_url = "https://github.com/Azure/azure-umqtt-c"
     description = "General purpose library for communication over the mqtt protocol"
-    license = "https://github.com/Azure/azure-iot-sdk-c/blob/master/LICENSE"
+    license = "https://github.com/Azure/azure-umqtt-c/blob/master/LICENSE"
     requires = "Azure-C-Shared-Utility/1.0.41@bincrafters/stable"
     options = {"shared": [True, False]}
     default_options = "shared=True"
