@@ -1,6 +1,8 @@
 from conans import ConanFile, CMake
 import os
 import platform
+import subprocess
+
 
 class AzureumqttcTestConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
@@ -19,8 +21,9 @@ class AzureumqttcTestConan(ConanFile):
         self.copy("*.dylib*", dst="bin", src="lib")
 
     def test(self):
-        os.chdir("bin")
         app_name = "mqtt_client_sample"
         if platform.system() == "Windows":
             app_name += ".exe"
-        assert(os.path.isfile(app_name))
+        assert(os.path.isfile(os.path.join("bin", app_name)))
+        if platform.system() != "Windows":
+            subprocess.check_call(os.path.join("bin", app_name))

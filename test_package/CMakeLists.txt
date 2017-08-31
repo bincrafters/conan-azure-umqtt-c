@@ -30,6 +30,7 @@ ENDIF(WIN32)
 include_directories(.)
 
 add_executable(mqtt_client_sample ${mqtt_client_sample_c_files} ${mqtt_client_sample_h_files})
+set_property(TARGET mqtt_client_sample PROPERTY C_STANDARD 99)
 
 if (WIN32)
     target_link_libraries(mqtt_client_sample
