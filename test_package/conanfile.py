@@ -19,11 +19,14 @@ class AzureumqttcTestConan(ConanFile):
     def imports(self):
         self.copy("*.dll", dst="bin", src="bin")
         self.copy("*.dylib*", dst="bin", src="lib")
+        self.copy("*.so*", dst="bin", src="lib")
+        self.copy("*.cmake", dst="res", src="res")
 
     def test(self):
         app_name = "mqtt_client_sample"
         if platform.system() == "Windows":
             app_name += ".exe"
+        assert(os.path.isfile(os.path.join("res", "umqttConfig.cmake")))
         assert(os.path.isfile(os.path.join("bin", app_name)))
         if platform.system() != "Windows":
             subprocess.check_call(os.path.join("bin", app_name))
