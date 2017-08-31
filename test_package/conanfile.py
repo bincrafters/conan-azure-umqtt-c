@@ -25,4 +25,5 @@ class AzureumqttcTestConan(ConanFile):
         if platform.system() == "Windows":
             app_name += ".exe"
         assert(os.path.isfile(os.path.join("bin", app_name)))
-        subprocess.check_call(os.path.join("bin", app_name))
+        if platform.system() != "Windows":
+            subprocess.check_call(os.path.join("bin", app_name))
