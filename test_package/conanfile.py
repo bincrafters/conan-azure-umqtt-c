@@ -1,16 +1,14 @@
 from conans import ConanFile, CMake
 import os
 import platform
-import subprocess
 
 
-class AzureumqttcTestConan(ConanFile):
+class AzurecsharedutilityTestConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     generators = "cmake"
     user = os.getenv("CONAN_USERNAME", "bincrafters")
     channel = os.getenv("CONAN_CHANNEL", "testing")
-    requires = "Azure-uMQTT-C/1.0.41@%s/%s" % (user, channel)
-
+    
     def build(self):
         cmake = CMake(self)
         cmake.configure(source_dir=self.conanfile_directory, build_dir="./")
@@ -19,14 +17,10 @@ class AzureumqttcTestConan(ConanFile):
     def imports(self):
         self.copy("*.dll", dst="bin", src="bin")
         self.copy("*.dylib*", dst="bin", src="lib")
-        self.copy("*.so*", dst="bin", src="lib")
-        self.copy("*.cmake", dst="res", src="res")
 
     def test(self):
-        app_name = "mqtt_client_sample"
+        os.chdir("bin")
         if platform.system() == "Windows":
-            app_name += ".exe"
-        assert(os.path.isfile(os.path.join("res", "umqttConfig.cmake")))
-        assert(os.path.isfile(os.path.join("bin", app_name)))
-        if platform.system() != "Windows":
-            subprocess.check_call(os.path.join("bin", app_name))
+            self.run("iot_c_utility.exe")
+        else:
+            self.run("./iot_c_utility")

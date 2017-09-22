@@ -1,1 +1,0 @@
-conan upload --all --remote bincrafters Azure-uMQTT-C/1.0.41@bincrafters/testing
