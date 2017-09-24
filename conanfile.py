@@ -4,7 +4,7 @@ from conans import ConanFile, CMake, tools
 
 class AzureUMQTTCConan(ConanFile):
     name = "Azure-uMQTT-C"
-    version = "1.0.41"
+    version = "1.0.43"
     generators = "cmake"
     settings = "os", "arch", "compiler", "build_type"
     url = "https://github.com/bincrafters/conan-azure-umqtt-c"
@@ -13,9 +13,9 @@ class AzureUMQTTCConan(ConanFile):
     options = {"shared": [True, False]}
     default_options = "shared=True"
     lib_short_name = "umqtt"
-    release_date = "2017-08-11"
+    release_date = "2017-09-08"
     release_name = "%s-%s" % (name.lower(), release_date)
-    requires = "Azure-C-Shared-Utility/1.0.41@bincrafters/testing"
+    requires = "Azure-C-Shared-Utility/1.0.43@bincrafters/stable"
     
     def source(self):
         source_url = "https://github.com/Azure/azure-umqtt-c"
