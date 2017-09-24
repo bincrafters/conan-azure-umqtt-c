@@ -18,7 +18,8 @@ class AzureUMQTTCConan(ConanFile):
     requires = "Azure-C-Shared-Utility/1.0.43@bincrafters/testing"
     
     def source(self):
-        tools.get("%s/archive/%s.tar.gz" % (self.source_url, self.release_date))
+        source_url = "https://github.com/Azure/azure-umqtt-c"
+        tools.get("%s/archive/%s.tar.gz" % (source_url, self.release_date))
 
     def configure(self):
         # TODO: static library fails on Linux    
