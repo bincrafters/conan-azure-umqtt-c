@@ -15,7 +15,7 @@ class AzureUMQTTCConan(ConanFile):
     lib_short_name = "umqtt"
     release_date = "2017-08-11"
     release_name = "%s-%s" % (name.lower(), release_date)
-    requires = "Azure-C-Shared-Utility/1.0.41@bincrafters/testing"
+    requires = "Azure-C-Shared-Utility/1.0.41@bincrafters/stable"
     
     def source(self):
         source_url = "https://github.com/Azure/azure-umqtt-c"
