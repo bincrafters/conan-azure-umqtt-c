@@ -8,22 +8,25 @@ class AzureUMQTTCConan(ConanFile):
     generators = "cmake"
     settings = "os", "arch", "compiler", "build_type"
     url = "https://github.com/bincrafters/conan-azure-umqtt-c"
-    source_url = "https://github.com/Azure/azure-umqtt-c"
     description = "General purpose library for communication over the mqtt protocol"
     license = "https://github.com/Azure/azure-umqtt-c/blob/master/LICENSE"
-    requires = "Azure-C-Shared-Utility/1.0.41@bincrafters/testing"
     options = {"shared": [True, False]}
     default_options = "shared=True"
+    lib_short_name = "umqtt"
     release_date = "2017-08-11"
     release_name = "%s-%s" % (name.lower(), release_date)
-    lib_short_name = "umqtt"
+    requires = "Azure-C-Shared-Utility/1.0.41@bincrafters/testing"
     
     def source(self):
         tools.get("%s/archive/%s.tar.gz" % (self.source_url, self.release_date))
 
     def configure(self):
+        # TODO: static library fails on Linux    
         if self.settings.os == "Windows" and self.settings.compiler == "Visual Studio":
             self.options.shared = False
+
+        if self.settings.os == "Linux":
+            self.options.shared = True
 
     def build(self):
         conan_magic_lines='''project(%s)
