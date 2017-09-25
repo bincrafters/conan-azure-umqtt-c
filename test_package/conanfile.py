@@ -18,5 +18,4 @@ class TestPackageConan(ConanFile):
         self.copy("*.cmake", dst="res", src="res")
         
     def test(self):
-        os.chdir("bin")
-        self.run(".%stest_package" % os.sep)
+        self.run(os.path.join("bin","test_package"))
