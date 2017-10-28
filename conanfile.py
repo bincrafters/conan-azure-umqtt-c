@@ -21,6 +21,9 @@ class AzureUMQTTCConan(ConanFile):
         source_url = "https://github.com/Azure/azure-umqtt-c"
         tools.get("%s/archive/%s.tar.gz" % (source_url, self.release_date))
 
+    def configure(self):
+        self.options["Azure-C-Shared-Utility"].shared = self.options.shared
+
     def build(self):
         conan_magic_lines='''project(%s)
         include(../conanbuildinfo.cmake)
@@ -52,4 +55,4 @@ class AzureUMQTTCConan(ConanFile):
         self.copy(pattern="*.dylib", dst="lib", src=".")
 
     def package_info(self):
-        self.cpp_info.libs = self.collect_libs()
+        self.cpp_info.libs = tools.collect_libs(self)
