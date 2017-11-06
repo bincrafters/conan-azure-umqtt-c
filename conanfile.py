@@ -21,6 +21,9 @@ class AzureUMQTTCConan(ConanFile):
         source_url = "https://github.com/Azure/azure-umqtt-c"
         tools.get("%s/archive/%s.tar.gz" % (source_url, self.release_date))
 
+    def configure(self):
+        del self.settings.compiler.libcxx
+
     def build(self):
         conan_magic_lines='''project(%s)
         include(../conanbuildinfo.cmake)
