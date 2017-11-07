@@ -11,7 +11,7 @@ class AzureUMQTTCConan(ConanFile):
     description = "General purpose library for communication over the mqtt protocol"
     license = "https://github.com/Azure/azure-umqtt-c/blob/master/LICENSE"
     options = {"shared": [True, False]}
-    default_options = "shared=True"
+    default_options = "shared=False"
     lib_short_name = "umqtt"
     release_date = "2017-10-20"
     release_name = "%s-%s" % (name.lower(), release_date)
